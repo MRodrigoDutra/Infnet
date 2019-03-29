@@ -12,7 +12,7 @@ public class Question4 {
 		}
 	}
 
-	public long fatorial (int number){
+	public long fatorial (int number){ 
 		if(number == 0)
 		{
 			return 1;
