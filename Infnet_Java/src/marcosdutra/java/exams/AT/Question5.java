@@ -18,6 +18,7 @@ public class Question5 {
 		{
 			System.out.println("Números inválidos! \nAmbos os números não podem ser iguais a zero.\n Insira novamente!");
 		}
+	input.close();
 	}
 
 }
