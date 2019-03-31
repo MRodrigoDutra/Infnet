@@ -1,39 +1,40 @@
 package marcosdutra.java.exams.AT;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-import java.nio.file.*;
+
 import java.io.*;
 
 
 public class Question6 {
-
-	public static void main(String[] args) {
-		try{
-		//System.out.println("It works");
-			//arquivo tem 16 números desordenados de 0 a 15
+	public static void main(String [] args) 
+	{
+		String csvArquivo = "/home/cloudera/numeros.txt";
+		String separadorCampo = ",";
+		String linha = "";
+		BufferedReader arquivo = null;
+		
+		try {
 			
-			String linha = "";
-			String divisorNum = ",";
-			BufferedReader file = new BufferedReader(new FileReader("/home/cloudera/numeros.txt"));
-			String Str;
-			String ArqLine [] = new String[1000];
-			String  numbers[] = new String[1000];
-			int      sorter[] = new int [1000];
-			while((Str = file.readLine())!= null)
+			arquivo = new BufferedReader (new FileReader (csvArquivo)); 
+			while((linha = arquivo.readLine())!= null) //Leitura do arquivo
 			{
-				for(int i=0; i <= numbers.length; i++)
-				{
-					//ArqLine = 
-							System.out.println(Str.split(","));
-					//numbers[i] = ArqLine[i];
-					//sorter[i] = Integer.parseInt(numbers[i]);
+				String [] numbers = linha.split(separadorCampo); //Criação do vetor que recebe os números do arquivo
+				int sorter[] = new int[numbers.length]; //Criação do vetor que receberá os números do arquivo convertidos para inteiros
+				
+				System.out.println("Números do arquivo: \n"  +
+								   numbers[1] + " " + numbers[2] + " " + numbers[3] + " " + numbers[4] + " " + numbers[5] + " " + numbers[6] + " " +
+						           numbers[7] + " " + numbers[8] + " " + numbers[9] + " " + numbers[10] + " " + numbers[11] + " " + numbers[12] + " " +
+						           numbers[13]  + " " + numbers[14] + " " + numbers[15]);
+			
+				
+				for(int b=0; b <= 15;b++) //Leva os números de um vetor String para um Inteiro
+				{	
+				sorter[b] = Integer.parseInt(numbers[b]);
 				}
-				for(int j=0;j<=sorter.length;j++)
+				
+				for(int j=0;j<=15;j++) //Estrutura de ordenação dos números
 				{
-					for(int k=0; k <= sorter.length;k++)
+					for(int k=0; k <= 15;k++)
 					{
-						if(sorter[j] > sorter[k])
+						if(sorter[j] < sorter[k])
 							{
 								int maiorValor = sorter[j];
 								sorter[j] = sorter[k];
@@ -42,22 +43,32 @@ public class Question6 {
 					}
 					
 				}
-			
-			//Scanner scan = new Scanner (new FileReader("/home/cloudera/numeros.txt")).useDelimiter(",||\\n||\\"); //Usando delimitadores para ler o arquivo
-			
-			for(int a=0;a<=15;a++){
-				System.out.println("Vetor ordenado: " + sorter[a]);
+				
+				System.out.println("Números Ordenados: \n"  +
+						   sorter[1] + " " + sorter[2] + " " + sorter[3] + " " + sorter[4] + " " + sorter[5] + " " + sorter[6] + " " +
+				           sorter[7] + " " + sorter[8] + " " + sorter[9] + " " + sorter[10] + " " + sorter[11] + " " + sorter[12] + " " +
+				           sorter[13]  + " " + sorter[14] + " " + sorter[15]); // Impressão dos números ordenados na tela
 			}
+			
 		
-		}
+		
+		
+		
+		
+	}catch(FileNotFoundException e){
+		System.out.println("Arquivo não encontrado: \n" + e.getMessage());
+	}catch(ArrayIndexOutOfBoundsException e){
+		System.out.println("IndexOutOfBoundsException: \n" + e.getMessage());
+	}catch(IOException e) {
+		System.out.println("IO Erro: \n" + e.getMessage());
+	}finally {
+		if(arquivo != null){
+			try {
+				arquivo.close();
+			}catch (IOException e){
+				System.out.println("IO Erro: \n" + e.getMessage());
 			}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-			System.out.println("Falha ao ler o arquivo!!");
 		}
-		
-
 	}
-
+}
 }
